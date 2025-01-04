@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- 可以根据需求设置默认语言为 "en" 或 "zh" -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Society</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" 
+        rel="stylesheet">
+    <script src="JS/script.js" defer></script>
+    <style>
+        .hero-content h1 {
+            font-size: 5rem; /* 增大主标题字体 */
+        }
+        .hero-content p {
+            font-size: 3rem; /* 增大副标题字体 */
+        }
+        .hero-content .cta-button {
+            font-size: 1.2rem; /* 调整按钮字体 */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo" data-key="logoText">Newcastle University Marketing Society</div>
+        
+        <!-- 语言切换按钮 -->
+        <div class="lang-toggle" id="langToggleBtn">中 / EN</div>
+
+        <!-- 移动端汉堡菜单 -->
+        <div class="hamburger">&#9776;</div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 data-key="heroTitle">Welcome to the Marketing Society</h1>
+            <p data-key="heroDesc">We find &nbsp;&nbsp;&nbsp; We think &nbsp;&nbsp;&nbsp; We action</p>
+            <a href="#about" class="cta-button" data-key="heroCtaBtn">Learn More</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 关于我们 -->
+        <section id="about" class="about-section">
+            <h2 data-key="aboutTitle">About Us</h2>
+            <p data-key="aboutDesc">
+                The Marketing Society is dedicated to fostering innovation, collaboration, 
+                and creativity in the field of marketing. Our mission is to connect students, 
+                professionals, and enthusiasts through enriching activities and experiences.
+            </p>
+        </section>
+
+        <!-- Activities Section -->
+<section id="activities" class="activities-section">
+    <h2 data-key="activitiesTitle">What We Do</h2>
+    <div class="activities-container">
+        <div class="activity">
+            <div class="activity-text">
+                <h3 data-key="activity1Title">Workshops</h3>
+                <p data-key="activity1Desc">Hands-on workshops to sharpen your marketing skills.</p>
+            </div>
+            <div class="activity-image">
+                <div class="image-gallery">
+                    <!-- 图集区域 -->
+                    <div class="gallery-images">
+                        <img src="path/to/your/image1.jpg" alt="Workshops Image 1">
+                        <img src="path/to/your/image2.jpg" alt="Workshops Image 2">
+                        <img src="path/to/your/image3.jpg" alt="Workshops Image 3">
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="next" onclick="changeImage(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="activity">
+            <div class="activity-text">
+                <h3 data-key="activity2Title">Networking Events</h3>
+                <p data-key="activity2Desc">Meet industry experts and build valuable connections.</p>
+            </div>
+            <div class="activity-image">
+                <div class="image-gallery">
+                    <!-- 图集区域 -->
+                    <div class="gallery-images">
+                        <img src="path/to/your/image4.jpg" alt="Networking Events Image 1">
+                        <img src="path/to/your/image5.jpg" alt="Networking Events Image 2">
+                        <img src="path/to/your/image6.jpg" alt="Networking Events Image 3">
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="next" onclick="changeImage(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="activity">
+            <div class="activity-text">
+                <h3 data-key="activity3Title">Competitions</h3>
+                <p data-key="activity3Desc">Showcase your creativity in exciting challenges.</p>
+            </div>
+            <div class="activity-image">
+                <div class="image-gallery">
+                    <!-- 图集区域 -->
+                    <div class="gallery-images">
+                        <img src="path/to/your/image7.jpg" alt="Competitions Image 1">
+                        <img src="path/to/your/image8.jpg" alt="Competitions Image 2">
+                        <img src="path/to/your/image9.jpg" alt="Competitions Image 3">
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="next" onclick="changeImage(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- 加入我们 -->
+        <section id="join" class="join-section">
+            <h2 data-key="joinTitle">Join Us</h2>
+            <p data-key="joinDesc">
+                Become a part of our vibrant community. Sign up to receive updates 
+                and participate in our events.
+            </p>
+            <a href="#contact" class="cta-button" data-key="joinCtaBtn">Sign Up</a>
+        </section>
+    </main>
+
+    <!-- 页脚：联系信息 -->
+    <footer id="contact" class="footer">
+        <h2 data-key="contactTitle">Contact Us</h2>
+        <p data-key="contactEmail">Email: marketing_society@example.com</p>
+        <p data-key="contactPhone">Phone: +123 456 7890</p>
+        <p data-key="contactFollow">Follow us on social media:</p>
+        <div class="social-icons">
+            <a href="#" class="social-icon" data-key="contactFacebook">Facebook</a>
+            <a href="#" class="social-icon" data-key="contactTwitter">Twitter</a>
+            <a href="#" class="social-icon" data-key="contactInstagram">Instagram</a>
+        </div>
+    </footer>
+</body>
+</html>
