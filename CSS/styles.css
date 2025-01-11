@@ -1,3 +1,5 @@
+/* ===================== 原有代码 ===================== */
+
 /* General Styles */
 *,
 *::before,
@@ -81,16 +83,48 @@ h1, h2, h3 {
 
 /* Hero Section */
 .hero-section {
+    position: relative; /* 让内部绝对定位元素参照此容器 */
     height: 100vh;
-    background: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-        url('hero-bg.jpg') no-repeat center center / cover;
-    background-attachment: fixed; /* 固定背景图 */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
+    text-align: center;
+    overflow: hidden; /* 防止视频溢出 */
+}
+
+/* 用于视频覆盖整个容器 */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* 确保视频在文字后面 */
+}
+
+#hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 铺满容器但不拉伸变形 */
+}
+
+/* =============== 新增：视频淡入淡出的过渡样式 =============== */
+#hero-video {
+    transition: opacity 1s ease;
+    opacity: 1; /* 起始为可见 */
+}
+
+#hero-video.fade-out {
+    opacity: 0; /* 淡出到不可见 */
+}
+/* =============== 新增结束 =============== */
+
+.hero-content {
+    position: relative; /* 使文字能在视频上方 */
+    z-index: 1;
     text-align: center;
 }
 
@@ -158,17 +192,17 @@ h1, h2, h3 {
 .activities-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem; /* 增大项之间的间隔 */
 }
 
 .activity {
     display: flex;
-    justify-content: space-between; /* 居左显示文本，右边为图集 */
+    justify-content: space-between; /* 左侧文本，右侧图集 */
     align-items: center;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    padding: 2rem; /* 调整内边距为适中值 */
 }
 
 .activity-text {
@@ -197,6 +231,7 @@ h1, h2, h3 {
     border-radius: 10px;
 }
 
+/* 移除全局按钮圆角样式，并为特定按钮添加样式 */
 .gallery-controls {
     position: absolute;
     top: 50%;
@@ -206,28 +241,21 @@ h1, h2, h3 {
     transform: translateY(-50%);
 }
 
+/* 全局按钮样式，去除圆角 */
 button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 5px; /* 设置为适中的圆角 */
     font-size: 18px;
+    transition: background 0.3s;
 }
 
 button:hover {
     background: rgba(0, 0, 0, 0.8);
 }
-
-button.prev {
-    left: 10px;
-}
-
-button.next {
-    right: 10px;
-}
-
 
 
 /* Join Section */
@@ -250,7 +278,7 @@ button.next {
     margin: 0 auto 2rem auto;
 }
 
-.join-section .cta-button {
+.join-section .cta-button{
     padding: 0.75rem 2rem;
     background: #ff7f50;
     color: #fff;
@@ -269,29 +297,35 @@ button.next {
 
 /* Footer (Contact Section) */
 .footer {
-    padding: 4rem 2rem; /* 增加内边距，确保内容不被截断 */
+    padding-top: 1.5rem;    /* 缩小上内边距 */
+    padding-bottom: 1.5rem; /* 缩小下内边距 */
+    padding-left: 1rem;     /* 保持左内边距 */
+    padding-right: 1rem;    /* 保持右内边距 */
     background: #222;
     color: #fff;
     text-align: center;
+    width: 100%;
+    border-radius: 10px;     /* 可选：保持圆角 */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* 可选：保持阴影 */
 }
 
 .footer h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;       /* 缩小标题字体 */
     color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;   /* 调整下边距 */
 }
 
 .footer p {
-    font-size: 1rem;
+    font-size: 0.9rem;       /* 缩小段落字体 */
     color: #ccc;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;   /* 调整下边距 */
 }
 
 .footer .social-icons {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 0.8rem;       /* 缩小顶部间距 */
     flex-wrap: wrap;
 }
 
@@ -300,54 +334,71 @@ button.next {
     color: #ff7f50;
     font-weight: bold;
     transition: color 0.3s;
+    font-size: 0.95rem;       /* 缩小社交媒体图标的字体大小 */
 }
 
 .footer .social-icon:hover {
     color: #ff4500;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-
-    .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-        background: rgba(34, 34, 34, 0.95);
-        position: absolute;
-        top: 60px; /* 根据导航栏高度调整 */
-        right: 0;
-        width: 200px;
-        padding: 1rem;
-        display: none; /* 默认隐藏 */
+/* Responsive Adjustments for Footer */
+@media (max-width: 480px) {
+    .footer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
-    .nav-links.active {
-        display: flex;
+    .footer h2 {
+        font-size: 1.4rem;
     }
 
-    .navbar {
-        flex-wrap: wrap;
+    .footer p {
+        font-size: 0.85rem;
     }
 
-    .hamburger {
-        display: block; /* 小屏幕显示汉堡菜单 */
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .activities-container {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .footer .social-icons {
-        flex-direction: column;
+    .footer .social-icon {
+        font-size: 0.85rem;
     }
 }
 
-/* Optional: Smooth Scroll Behavior */
-html {
-    scroll-behavior: smooth;
+/* =============== 新增：Preloader 样式 =============== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff; /* 或者你想要的背景色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* 确保在最上层 */
 }
+
+#preloader .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top-color: #ff7f50; /* 也可改成主题色 */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+#preloader .loading-text {
+    margin-top: 1rem;         /* 与上方 spinner 保持一定距离 */
+    color: #ff7f50;           /* 橙色 */
+    font-size: 1.2rem;        /* 字号可自行调整 */
+    font-weight: bold;        /* 可选：加粗 */
+    font-family: 'Roboto', sans-serif; /* 如果想和主体一致 */
+    text-align: center;       /* 居中 */
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+/* =============== 新增结束 =============== */
