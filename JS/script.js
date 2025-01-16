@@ -1,15 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     /* ========== 导航栏 & 语言切换相关 ========== */
-    const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const langToggleBtn = document.getElementById('langToggleBtn');
 
-    // 点击汉堡菜单，切换导航栏在移动端的显示
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
 
     // 定义中英文翻译内容
     const translations = {
