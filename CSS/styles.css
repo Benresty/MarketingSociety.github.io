@@ -1,14 +1,15 @@
-/* ===================== 原有代码 ===================== */
+/* ===================== 重置与通用样式 ===================== */
 
-/* General Styles */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: #333;
@@ -16,13 +17,24 @@ body {
     overflow-x: hidden; /* 防止水平溢出 */
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 0;
 }
 
-/* Navbar Styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===================== 导航栏 ===================== */
 .navbar {
     display: flex;
+    /* 新增：让导航始终在最上层 */
+    position: relative;
+    z-index: 999;
+    
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
@@ -32,6 +44,7 @@ h1, h2, h3 {
     transition: background 0.3s ease-in-out;
 }
 
+/* 鼠标悬停导航栏时增加不透明度 */
 .navbar:hover {
     background: rgba(34, 34, 34, 1);
 }
@@ -39,14 +52,18 @@ h1, h2, h3 {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    white-space: nowrap; /* 防止长文本换行 */
 }
 
+/* 菜单链接（桌面端） */
 .nav-links {
     list-style: none;
-    display: flex;
+    display: flex; /* 桌面端: 水平布局 */
     gap: 1.5rem;
+    transition: all 0.3s ease;
 }
 
+/* 菜单中的链接 */
 .nav-links a {
     text-decoration: none;
     color: #fff;
@@ -58,7 +75,7 @@ h1, h2, h3 {
     color: #ff7f50;
 }
 
-/* 语言切换按钮样式 */
+/* 语言切换按钮 */
 .lang-toggle {
     cursor: pointer;
     background: #ff7f50;
@@ -68,22 +85,22 @@ h1, h2, h3 {
     margin-left: 1rem;
     font-weight: bold;
     transition: background 0.3s;
+    /* 新增或修改的 */
+    font-size: 0.8rem;     /* 缩小字体 */
+    padding: 0.3rem 0.6rem;/* 适当减小内边距 */
 }
 
 .lang-toggle:hover {
     background: #ff4500;
 }
 
-/* 汉堡菜单 */
-.hamburger {
-    display: none; /* 默认在桌面端隐藏，移动端显示 */
-    font-size: 1.5rem;
-    cursor: pointer;
-}
 
-/* Hero Section */
+/* ===================== Hero Section ===================== */
 .hero-section {
-    position: relative; /* 让内部绝对定位元素参照此容器 */
+    position: relative;
+    /* 新增：不要用负 z-index，避免把自己埋到最底层 */
+    z-index: 0;
+    
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -91,10 +108,11 @@ h1, h2, h3 {
     align-items: center;
     color: #fff;
     text-align: center;
-    overflow: hidden; /* 防止视频溢出 */
+    overflow: hidden;
+    /* 如果有背景色可改为 transparent，看上去更适合覆盖视频 */
+    background: transparent;
 }
 
-/* 用于视频覆盖整个容器 */
 .video-background {
     position: absolute;
     top: 0;
@@ -102,29 +120,27 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* 确保视频在文字后面 */
+    
+    /* 让视频在最底层，但不高于 hero-content */
+    z-index: 0;
 }
 
 #hero-video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 铺满容器但不拉伸变形 */
-}
-
-/* =============== 新增：视频淡入淡出的过渡样式 =============== */
-#hero-video {
+    object-fit: cover;
     transition: opacity 1s ease;
-    opacity: 1; /* 起始为可见 */
+    opacity: 1;
 }
 
 #hero-video.fade-out {
-    opacity: 0; /* 淡出到不可见 */
+    opacity: 0;
 }
-/* =============== 新增结束 =============== */
 
 .hero-content {
-    position: relative; /* 使文字能在视频上方 */
-    z-index: 1;
+    position: relative;
+    /* 让文字在视频上方 */
+    z-index: 2;
     text-align: center;
 }
 
@@ -155,7 +171,7 @@ h1, h2, h3 {
     transform: scale(1.1);
 }
 
-/* About Section */
+/* ===================== About Section ===================== */
 .about-section {
     padding: 4rem 2rem;
     background: #fff;
@@ -175,11 +191,11 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
-/* Activities Section */
+/* ===================== Activities Section ===================== */
 .activities-section {
     padding: 4rem 2rem;
     background: #f0f0f0;
-    text-align: left; /* 居左对齐 */
+    text-align: left;
 }
 
 .activities-section h2 {
@@ -192,28 +208,29 @@ h1, h2, h3 {
 .activities-container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem; /* 增大项之间的间隔 */
+    gap: 2.5rem;
 }
 
 .activity {
     display: flex;
-    justify-content: space-between; /* 左侧文本，右侧图集 */
+    justify-content: space-between;
     align-items: center;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2rem; /* 调整内边距为适中值 */
+    padding: 2rem;
 }
 
 .activity-text {
     flex: 1;
+    padding-right: 1rem;
 }
 
 .activity-image {
     flex: 1;
+    padding-left: 1rem;
 }
 
-/* 图集区域 */
 .image-gallery {
     position: relative;
     width: 100%;
@@ -231,7 +248,6 @@ h1, h2, h3 {
     border-radius: 10px;
 }
 
-/* 移除全局按钮圆角样式，并为特定按钮添加样式 */
 .gallery-controls {
     position: absolute;
     top: 50%;
@@ -241,14 +257,14 @@ h1, h2, h3 {
     transform: translateY(-50%);
 }
 
-/* 全局按钮样式，去除圆角 */
+/* 统一按钮样式 */
 button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px; /* 设置为适中的圆角 */
+    border-radius: 5px;
     font-size: 18px;
     transition: background 0.3s;
 }
@@ -257,8 +273,7 @@ button:hover {
     background: rgba(0, 0, 0, 0.8);
 }
 
-
-/* Join Section */
+/* ===================== Join Section ===================== */
 .join-section {
     padding: 4rem 2rem;
     background: #fff;
@@ -278,7 +293,7 @@ button:hover {
     margin: 0 auto 2rem auto;
 }
 
-.join-section .cta-button{
+.join-section .cta-button {
     padding: 0.75rem 2rem;
     background: #ff7f50;
     color: #fff;
@@ -295,37 +310,37 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* Footer (Contact Section) */
+/* ===================== Footer ===================== */
 .footer {
-    padding-top: 1.5rem;    /* 缩小上内边距 */
-    padding-bottom: 1.5rem; /* 缩小下内边距 */
-    padding-left: 1rem;     /* 保持左内边距 */
-    padding-right: 1rem;    /* 保持右内边距 */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     background: #222;
     color: #fff;
     text-align: center;
     width: 100%;
-    border-radius: 10px;     /* 可选：保持圆角 */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* 可选：保持阴影 */
+    border-radius: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .footer h2 {
-    font-size: 1.6rem;       /* 缩小标题字体 */
+    font-size: 1.6rem;
     color: #fff;
-    margin-bottom: 0.6rem;   /* 调整下边距 */
+    margin-bottom: 0.6rem;
 }
 
 .footer p {
-    font-size: 0.9rem;       /* 缩小段落字体 */
+    font-size: 0.9rem;
     color: #ccc;
-    margin-bottom: 0.4rem;   /* 调整下边距 */
+    margin-bottom: 0.4rem;
 }
 
 .footer .social-icons {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    margin-top: 0.8rem;       /* 缩小顶部间距 */
+    margin-top: 0.8rem;
     flex-wrap: wrap;
 }
 
@@ -334,71 +349,126 @@ button:hover {
     color: #ff7f50;
     font-weight: bold;
     transition: color 0.3s;
-    font-size: 0.95rem;       /* 缩小社交媒体图标的字体大小 */
+    font-size: 0.95rem;
 }
 
 .footer .social-icon:hover {
     color: #ff4500;
 }
 
-/* Responsive Adjustments for Footer */
-@media (max-width: 480px) {
-    .footer {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-
-    .footer h2 {
-        font-size: 1.4rem;
-    }
-
-    .footer p {
-        font-size: 0.85rem;
-    }
-
-    .footer .social-icon {
-        font-size: 0.85rem;
-    }
-}
-
-/* =============== 新增：Preloader 样式 =============== */
+/* ===================== Preloader ===================== */
 #preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff; /* 或者你想要的背景色 */
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999; /* 确保在最上层 */
+    z-index: 9999; /* 让它最先覆盖页面 */
 }
 
 #preloader .spinner {
     width: 50px;
     height: 50px;
     border: 5px solid #ddd;
-    border-top-color: #ff7f50; /* 也可改成主题色 */
+    border-top-color: #ff7f50;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 #preloader .loading-text {
-    margin-top: 1rem;         /* 与上方 spinner 保持一定距离 */
-    color: #ff7f50;           /* 橙色 */
-    font-size: 1.2rem;        /* 字号可自行调整 */
-    font-weight: bold;        /* 可选：加粗 */
-    font-family: 'Roboto', sans-serif; /* 如果想和主体一致 */
-    text-align: center;       /* 居中 */
+    margin-top: 1rem;
+    color: #ff7f50;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
-
 
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
 }
-/* =============== 新增结束 =============== */
+
+/* ===================== 自适应（响应式）部分 ===================== */
+/* ========== 在这里添加媒体查询，以针对手机或小屏幕优化 ========== */
+
+/* 中屏以下（如平板和大屏手机）：768px */
+@media (max-width: 768px) {
+
+    /* 让导航栏的链接隐藏或垂直排列，并显示汉堡菜单 */
+    .nav-links {
+        position: absolute;
+        top: 70px; /* 根据导航栏高度做调节 */
+        right: 0;
+        background: #222;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        display: none; /* 默认隐藏，点击汉堡菜单出现 */
+    }
+
+    .nav-links.active {
+        display: flex; /* 点击汉堡菜单时显示 */
+    }
+
+    /* 如果需要让 logo 与语言切换按钮等在同一行或换行，可自行设置 */
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    /* 调整活动板块活动项为垂直排列，避免左右放不下 */
+    .activity {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .activity-text {
+        padding-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .activity-image {
+        padding-left: 0;
+    }
+}
+
+/* 更小屏（如手机）：480px */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-links {
+        width: 60%; /* 或者 100%，也可按需求设置 */
+        top: 50px;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    /* Hero 内容可适当缩小 */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* 关于我们、加入我们等区块可适当缩小内边距 */
+    .about-section,
+    .join-section,
+    .activities-section {
+        padding: 2rem 1rem;
+    }
+    
+    .footer {
+        border-radius: 0; /* 小屏幕时也可不带圆角 */
+    }
+}
