@@ -1,36 +1,57 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- 可以根据需求设置默认语言为 "en" 或 "zh" -->
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <!-- 移动端适配必备 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketing Society</title>
+
+    <!-- 样式文件 -->
     <link rel="stylesheet" href="CSS/styles.css">
+
+    <!-- 字体引入 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- JS 文件 -->
     <script src="JS/script.js" defer></script>
+
+    <!-- 如果有需要额外的内联样式也可放在这里 -->
     <style>
+        /* 保留示例，仅对 hero 主标题等做特殊调整，可根据需要自行修改 */
         .hero-content h1 {
             font-size: 5rem;
-            /* 增大主标题字体 */
         }
 
         .hero-content p {
             font-size: 3rem;
-            /* 增大副标题字体 */
         }
 
         .hero-content .cta-button {
             font-size: 1.2rem;
-            /* 调整按钮字体 */
+        }
+
+        /* 在中小屏时适当收缩字体（也可放到 styles.css 内的 @media 里统一管理） */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.5rem;
+            }
+            .hero-content .cta-button {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- 1. 预加载动画容器（Preloader） -->
+    <!-- 预加载动画容器（Preloader） -->
     <div id="preloader">
         <div class="spinner"></div>
         &nbsp;&nbsp;&nbsp;
@@ -41,16 +62,14 @@
     <nav class="navbar">
         <div class="logo" data-key="logoText">Newcastle University Marketing Society</div>
         <ul class="nav-links">
-            <!-- 这里可以放链接，也可以在JS里根据 data-key 自动翻译 -->
+            <!-- 可在JS里根据 data-key 自动翻译 -->
         </ul>
         <div class="lang-toggle" id="langToggleBtn">中 / EN</div>
-        <div class="hamburger">&#9776;</div>
     </nav>
 
     <!-- 英雄区 -->
     <header class="hero-section">
         <div class="video-background">
-            <!-- 2. 注意：去掉 loop 属性，改用JS控制循环 -->
             <video id="hero-video" autoplay muted preload="auto" playsinline loop>
                 <source
                     src="https://societyimages-1334272461.cos.eu-frankfurt.myqcloud.com/video%20for%20the%20webisepage.mp4"
@@ -66,7 +85,6 @@
         </div>
     </header>
 
-
     <main>
         <!-- 关于我们 -->
         <section id="about" class="about-section">
@@ -78,21 +96,17 @@
             </p>
         </section>
 
-        <!-- Activities Section -->
+        <!-- 活动板块 -->
         <section id="activities" class="activities-section">
             <h2 data-key="activitiesTitle">What We Do</h2>
             <div class="activities-container">
                 <div class="activity">
                     <div class="activity-text">
                         <h3 data-key="activity1Title">Workshops</h3>
-                        <p data-key="activity1Desc">Marketing society holds regular academic seminar events where we
-                            discuss the performance of specific markets and how they are marketed. Topics and content
-                            are proposed and voted on by the members of the society,
-                            and you can ask others to join you in discussing whatever you want to discuss.</p>
+                        <p data-key="activity1Desc">Marketing society holds regular academic seminar events...</p>
                     </div>
                     <div class="activity-image">
                         <div class="image-gallery">
-                            <!-- 图集区域 -->
                             <div class="gallery-images">
                                 <img src="https://societyimages-1334272461.cos.eu-frankfurt.myqcloud.com/_DSC9175.JPG"
                                     alt="Workshops Image 1">
@@ -100,12 +114,13 @@
                                 <img src="path/to/your/image3.jpg" alt="Workshops Image 3">
                             </div>
                             <div class="gallery-controls">
-                                <button class="prev" onclick="changeImage(-1)">&#10094;</button>
-                                <button class="next" onclick="changeImage(1)">&#10095;</button>
+                                <button class="prev">&#10094;</button>
+                                <button class="next">&#10095;</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="activity">
                     <div class="activity-text">
                         <h3 data-key="activity2Title">Networking Events</h3>
@@ -113,7 +128,6 @@
                     </div>
                     <div class="activity-image">
                         <div class="image-gallery">
-                            <!-- 图集区域 -->
                             <div class="gallery-images">
                                 <img src="https://societyimages-1334272461.cos.eu-frankfurt.myqcloud.com/pexels-ai-tanaka-34165598-7133949.jpg"
                                     alt="Networking Events Image 1">
@@ -127,6 +141,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="activity">
                     <div class="activity-text">
                         <h3 data-key="activity3Title">Competitions</h3>
@@ -134,7 +149,6 @@
                     </div>
                     <div class="activity-image">
                         <div class="image-gallery">
-                            <!-- 图集区域 -->
                             <div class="gallery-images">
                                 <img src="https://societyimages-1334272461.cos.eu-frankfurt.myqcloud.com/pexels-1108936515-20798348.jpg"
                                     alt="Competitions Image 1">
@@ -142,8 +156,8 @@
                                 <img src="path/to/your/image9.jpg" alt="Competitions Image 3">
                             </div>
                             <div class="gallery-controls">
-                                <button class="prev" onclick="changeImage(-1)">&#10094;</button>
-                                <button class="next" onclick="changeImage(1)">&#10095;</button>
+                                <button class="prev">&#10094;</button>
+                                <button class="next">&#10095;</button>
                             </div>
                         </div>
                     </div>
@@ -151,52 +165,48 @@
             </div>
         </section>
 
-        <!-- 第一块加入我们 -->
+        <!-- 第一块：加入我们 -->
         <section id="join" class="join-section">
             <h2 data-key="joinTitle">Get started and Join Us</h2>
             <p data-key="joinDesc">
-                Sign up to receive updates and participate in our events.
-                This link will directly bring you to our official NUSU page.
+                Sign up to receive updates and participate in our events...
             </p>
-            <a href="https://nusu.co.uk/activities/view-society/374" class="cta-button" data-key="joinCtaBtn"
-                target="_blank">
+            <a href="https://nusu.co.uk/activities/view-society/374" class="cta-button" data-key="joinCtaBtn" target="_blank">
                 Sign Up
             </a>
         </section>
 
-        <!-- 第二块 Membership Information -->
+        <!-- 第二块：Membership Information -->
         <section id="membership-info" class="join-section">
-            <!-- 不要再用 aboutTitle/Desc，换成 membershipTitle/Desc -->
             <h2 data-key="membershipTitle">Membership information submission</h2>
             <p data-key="membershipDesc">
-                If you have already made your payment,
-                we kindly ask that you complete this questionnaire
-                to facilitate a smoother integration into the community.
+                If you have already made your payment, please fill this form...
             </p>
-            <a href="https://forms.office.com/e/xuhPYBpzNK" class="cta-button" data-key="membershipCtaBtn"
-                target="_blank">
+            <a href="https://forms.office.com/e/xuhPYBpzNK" class="cta-button" data-key="membershipCtaBtn" target="_blank">
                 Submit here
             </a>
         </section>
-
     </main>
 
-    <!-- 页脚：联系信息 -->
+    <!-- 页脚 -->
     <footer id="contact" class="footer">
         <h2 data-key="contactTitle">Contact Us</h2>
         <p data-key="contactEmail">Email: NUBS.MarketingSociety@outlook.com</p>
-        <p data-key="contactPhone">Official website page: https://nusu.co.uk/activities/view-society/374</p>
+        <p data-key="contactPhone">Official website page: https://nusu.co.uk/...</p>
         <p data-key="contactFollow">Follow us on social media:</p>
         <div class="social-icons">
-            <a href="https://www.instagram.com/nubsmarketingsociety/" target="_blank" class="social-icon"
-                data-key="contactInstagram" aria-label="Instagram">Instagram </a>
+            <a href="https://www.instagram.com/nubsmarketingsociety/" target="_blank"
+                class="social-icon"
+                data-key="contactInstagram"
+                aria-label="Instagram">Instagram</a>
         </div>
         <div class="social-icons">
-            <a href="https://www.xiaohongshu.com/user/profile/5cf27d38000000000500dd37?xsec_token=AB1q-Nwrg_iTEbsjxEMoZU_n9rZED2xnqHIMSVVacFw3I%3D&xsec_source=pc_search"
-                target="_blank" class="social-icon" data-key="contactXiaohongshu">小红书 </a>
+            <a href="https://www.xiaohongshu.com/user/profile/5cf27d38000000000500dd37?..."
+                target="_blank"
+                class="social-icon"
+                data-key="contactXiaohongshu">小红书</a>
         </div>
     </footer>
-
 </body>
 
 </html>
